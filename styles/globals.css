@@ -6,45 +6,31 @@
 
 /* Base styles */
 .main {
-  width: 100vw;
-  min-height: 100vh;
-  position: fixed;
-  display: flex;
-  justify-content: center;
+  @apply w-screen min-h-screen relative flex justify-center;
   padding: 120px 24px 160px 24px;
   pointer-events: none;
 }
 
-.main:before {
-  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
-  position: absolute;
+.main::before {
   content: "";
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  top: 0;
+  @apply absolute inset-0 z-20;
+  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
 }
 
-.main:after {
+.main::after {
   content: "";
-  background-image: url("/assets/images/grid.svg");
-  z-index: 1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  opacity: 0.4;
+  @apply absolute inset-0 z-10 opacity-40;
+
   filter: invert(1);
 }
 
 .gradient {
-  height: fit-content;
-  z-index: 3;
-  max-width: 640px;
-  position: absolute;
-  filter: blur(100px) saturate(150%);
+  @apply absolute z-30 max-w-[640px];
   top: 80px;
-  opacity: 0.15;
+  width: 100%;
+  height: auto;
+  filter: blur(100px) saturate(150%);
+  opacity: 0.15; /* raw CSS to avoid Tailwind invalid class */
 }
 
 @media screen and (max-width: 640px) {
@@ -55,15 +41,15 @@
 
 /* Tailwind-safe @apply classes */
 .app {
-  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+  @apply relative z-10 flex flex-col justify-center items-center max-w-7xl mx-auto px-6 sm:px-16;
 }
 
 .black_btn {
-  @apply rounded-full border border-black py-1.5 px-5 text-white transition-all text-center text-sm flex items-center justify-center;
+  @apply rounded-full border border-black py-1.5 px-5 text-white text-center text-sm flex items-center justify-center transition-all;
 }
 
 .outline_btn {
-  @apply rounded-full border border-black py-1.5 px-5 text-black transition-all text-center text-sm flex items-center justify-center;
+  @apply rounded-full border border-black py-1.5 px-5 text-black text-center text-sm flex items-center justify-center transition-all;
 }
 
 .head_text {
@@ -78,74 +64,19 @@
   @apply block w-full rounded-md border border-gray-200 py-2.5 pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
 }
 
-.form_textarea {
-  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0;
+.form_textarea,
+.form_input {
+  @apply w-full rounded-lg mt-2 p-3 text-sm text-gray-500 outline-none;
 }
 
-.form_input {
-  @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
+.form_textarea {
+  @apply h-[200px] flex;
 }
 
 .logo_text {
-  @apply max-sm:hidden font-semibold text-lg text-black tracking-wide;
+  @apply hidden sm:inline font-semibold text-lg text-black tracking-wide;
 }
 
 .dropdown {
-  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
-}
-
-.dropdown_link {
-  @apply text-sm text-gray-700 hover:text-gray-500 font-medium;
-}
-
-.prompt_card {
-  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 p-6 pb-4 md:w-[360px] w-full h-fit;
-}
-
-/* Flex helpers */
-.flex-center {
-  @apply flex justify-center items-center;
-}
-
-.flex-start {
-  @apply flex justify-start items-start;
-}
-
-.flex-end {
-  @apply flex justify-end items-center;
-}
-
-.flex-between {
-  @apply flex justify-between items-center;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.6s ease-in-out;
-}
-
-/* Dark mode */
-html.dark {
-  background: linear-gradient(to br, #1a1a1a, #2b2b2b);
-  color-scheme: dark;
-}
-
-html.dark textarea {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-html.dark button {
-  background: linear-gradient(to right, #bb86fc, #6200ee);
+  @apply absolute right-0 top-full mt-3 w-full min-w-[210px] p-5 rounded-lg bg-white flex flex-col gap-2 justify-end items-end;
 }
