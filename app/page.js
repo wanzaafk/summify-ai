@@ -1,38 +1,37 @@
 "use client";
 import React, { useState } from "react";
 
+
+
 export default function Home() {
   const [text, setText] = useState("");
   const [summary, setSummary] = useState("");
 
   const handleSummarize = () => {
-  if (!text.trim()) {
-    setSummary("Please enter some text to summarize ✨");
-    return;
-  }
+    if (!text.trim()) {
+      setSummary("Please enter some text to summarize ✨");
+      return;
+    }
 
-  const words = text.split(" ").slice(0, 15).join(" ") + "...";
-  let index = 0;
-  setSummary("");
+    const words = text.split(" ").slice(0, 15).join(" ") + "...";
+    let index = 0;
+    setSummary("");
 
-  const interval = setInterval(() => {
-    setSummary((prev) => prev + words[index]);
-    index++;
-    if (index >= words.length) clearInterval(interval);
-  }, 40);
-};
-
+    const interval = setInterval(() => {
+      setSummary((prev) => prev + words[index]);
+      index++;
+      if (index >= words.length) clearInterval(interval);
+    }, 40);
+  };
 
   return (
-   
-
     <div className="min-h-screen bg-gradient-to-br from-purple-700 via-indigo-600 to-pink-500 flex items-center justify-center px-4">
       <div className="bg-white/10 backdrop-blur-xl p-8 rounded-3xl shadow-2xl w-full max-w-xl text-center border border-white/20">
-       <img
-  src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
-  alt="Sammy Avatar"
-  className="w-20 h-20 mx-auto mb-4 animate-bounce"
-/>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
+          alt="Sammy Avatar"
+          className="w-20 h-20 mx-auto mb-4 animate-bounce"
+        />
         <h1 className="text-4xl font-extrabold text-white mb-4">
           🌙 Sammy AI Summarizer
         </h1>
@@ -40,14 +39,12 @@ export default function Home() {
           Summarize long text instantly with a touch of magic ✨
         </p>
 
-<button
-  onClick={() =>
-    document.documentElement.classList.toggle("dark")
-  }
-  className="absolute top-6 right-6 text-white/70 hover:text-white transition-all"
->
-  🌗 Toggle Theme
-</button>
+        <button
+          onClick={() => document.documentElement.classList.toggle("dark")}
+          className="absolute top-6 right-6 text-white/70 hover:text-white transition-all"
+        >
+          🌗 Toggle Theme
+        </button>
 
         <textarea
           value={text}
